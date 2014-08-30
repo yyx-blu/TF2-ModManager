@@ -36,6 +36,7 @@ Partial Class CfgChooser
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -135,30 +136,40 @@ Partial Class CfgChooser
         '
         Me.Button10.Location = New System.Drawing.Point(12, 149)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(95, 28)
+        Me.Button10.Size = New System.Drawing.Size(297, 28)
         Me.Button10.TabIndex = 10
         Me.Button10.Text = "Autoexec"
         Me.Button10.UseVisualStyleBackColor = True
         '
         'Button11
         '
-        Me.Button11.Location = New System.Drawing.Point(113, 149)
+        Me.Button11.Location = New System.Drawing.Point(12, 217)
         Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(95, 28)
+        Me.Button11.Size = New System.Drawing.Size(297, 28)
         Me.Button11.TabIndex = 11
-        Me.Button11.Text = "Otro"
+        Me.Button11.Text = "Examinar..."
         Me.Button11.UseVisualStyleBackColor = True
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(12, 183)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(297, 28)
+        Me.Button12.TabIndex = 12
+        Me.Button12.Text = "Nuevo"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
         'CfgChooser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(321, 191)
+        Me.ClientSize = New System.Drawing.Size(321, 260)
+        Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
@@ -194,4 +205,5 @@ Partial Class CfgChooser
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents Button11 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Button12 As System.Windows.Forms.Button
 End Class

@@ -6,7 +6,7 @@ Public Class Main
     Dim list1, list2 As Integer
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles bnF5.Click
         Actualizar()
     End Sub
 
@@ -46,7 +46,7 @@ Public Class Main
         'Label2.Text = CheckedListBox1.Items.Count.ToString
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles bnActDea.Click
         Me.Enabled = False
         Dim checked As String
         Dim tempdir As String
@@ -73,7 +73,7 @@ Public Class Main
 
             checked += 1
         End While
-        
+
         checked = 0
 
         'Desactivados a activados (Funciona correctamente)
@@ -102,7 +102,7 @@ Public Class Main
         End While
         'End If
 
-        
+
         Actualizar()
         'MsgBox("Trabajo Terminado", MsgBoxStyle.Information, "Listo")
         checked = 0
@@ -136,15 +136,6 @@ Public Class Main
             updatefail = True
         End Try
 
-        If updatefail = True Then
-            MsgBox("Hubo un error al actualizar la lista de archivos. Se estan buscando en la siguiente ruta." & vbCrLf & steamdir, MsgBoxStyle.Critical, "Error")
-            CheckedListBox1.Items.Clear()
-            CheckedListBox2.Items.Clear()
-            CheckedListBox3.Items.Clear()
-            CheckedListBox4.Items.Clear()
-        End If
-        updatefail = False
-
         'Mods en Archivos
         Try
             For Each vpk As String In Directory.GetFiles(steamdir & "custom\", "*.vpk")
@@ -176,27 +167,76 @@ Public Class Main
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles bnOpc.Click
         Me.Enabled = False
         Opciones.Show()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles BnInst.Click
         Instalar.Show()
         Me.Enabled = False
 
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles picAbout.Click
         About.Show()
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles bnUtil.Click
         Utils.Show()
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Shell("explorer.exe " & steamdir,AppWinStyle.NormalFocus)
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles bnExa.Click
+        Shell("explorer.exe " & steamdir, AppWinStyle.NormalFocus)
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles bnBorrar.Click
+        'Boton Borrar
+        Dim cuenta As Integer
+        cuenta = CheckedListBox1.CheckedItems.Count + CheckedListBox2.CheckedItems.Count
+        If cuenta = 0 Then
+            MsgBox("Ningun mod ha sido seleccionado", MsgBoxStyle.Information, "No hay nada que borrar")
+            Return
+        End If
+
+        Dim desicion As DialogResult
+        Dim elementos As String
+        If cuenta = 1 Then
+            elementos = " elemento"
+        Else
+            elementos = " elementos"
+        End If
+        desicion = MessageBox.Show("Se han seleccionado un total de " + Str(cuenta) + elementos + ". Seguro que desea borrarlos?", "Borrar mods", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If desicion = Windows.Forms.DialogResult.No Then
+            Return
+        End If
+
+        'MsgBox("Numero de elementos seleccionados: " + Str(cuenta))
+
+        'Lista 1
+        Dim borrarMods(CheckedListBox1.CheckedItems.Count) As String
+        Dim i As Integer
+        Dim iborrar As Integer = 0
+        For i = 0 To CheckedListBox1.Items.Count - 1
+            If CheckedListBox1.GetItemCheckState(i) = CheckState.Checked Then
+                borrarMods(iborrar) = CheckedListBox3.Items(i).ToString
+                'MsgBox(borrarMods(iborrar))
+                iborrar += 1
+            End If
+        Next
+        'Direcciones almacenadas en el array
+
+        
+        'Lista 2
+        Dim borrarMods2(CheckedListBox2.CheckedItems.Count) As String
+        iborrar = 0
+        For i = 0 To CheckedListBox2.Items.Count - 1
+            If CheckedListBox2.GetItemCheckState(i) = CheckState.Checked Then
+                borrarMods(iborrar) = CheckedListBox4.Items(i).ToString
+                iborrar += 1
+            End If
+        Next
+
     End Sub
 End Class
